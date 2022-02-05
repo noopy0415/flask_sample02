@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
@@ -7,9 +7,14 @@ app = Flask(__name__)
 def hello_world():
     return "Hello,World"
 
-@app.route("/login")
+
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    return "Login!"
+    if request.method == "GET":
+        return render_template("login.html")
+    if request.method == "POST":
+        return "Login!"
+
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="127.0.0.1", debug=True)
